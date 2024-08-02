@@ -1,20 +1,34 @@
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
-import Home from "./components/Home";
-import About from "./components/About";
+import { useState } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Login from "./components/Login";
+import Signup from "./components/Signup";
+import Landing from "./components/Landing";
 
 function App() {
+
+  const [users, setUsers] = useState(
+    [
+      {
+        id: "1",
+        username: "chan",
+        password: '123'
+      },
+      {
+        id: "2",
+        username: "aswin",
+        password: '123'
+      }
+    ]
+  )
+
   return (
     <div>
       <BrowserRouter>
-        <nav>
-          <Link to={"/home"}>Home</Link>
-          {" "}
-          <Link to={"/about"}>About</Link>
-        </nav>
 
         <Routes>
-          <Route path="/home" element={<Home></Home>}></Route>
-          <Route path="/about" element={<About></About>}></Route>
+          <Route path="/" element={<Login users={users} setUsers={setUsers}></Login>}></Route>
+          <Route path="/signup" element={<Signup users={users} setUsers={setUsers}></Signup>}></Route>
+          <Route path="/landing" element={<Landing></Landing>}></Route>
         </Routes>
       </BrowserRouter>
     </div>
